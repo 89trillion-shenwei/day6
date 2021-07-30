@@ -20,12 +20,15 @@ func Connect(username, url string) {
 		fmt.Println("重名")
 		return
 	}
-	model.ConnectStatus.SetText("Connection status: connected")
+	if model.ConnectStatus.Text == "Connection status: connected" {
+		return
+	}
 	Header := http.Header{}
 	Header.Add("username", username)
 	ws, _, err := websocket.DefaultDialer.Dial(url, Header)
 	if err != nil {
 		fmt.Println("websocket连接失败，" + err.Error())
+		return
 	}
 	//发送广播
 	msg1 := mes.Msg{
@@ -46,6 +49,7 @@ func Connect(username, url string) {
 	client := model.GetClient()
 	client.Conn = ws
 	client.UserName = username
+	model.ConnectStatus.SetText("Connection status: connected")
 	//开启发送和接收
 	go client.ReceiveMsg()
 	go client.SendMsg()
