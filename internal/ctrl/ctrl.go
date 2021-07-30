@@ -12,6 +12,10 @@ import (
 
 // Connect 连接请求
 func Connect(username, url string) {
+	if !Service.Check(model.Left.Text, username) {
+		fmt.Println("重名")
+		return
+	}
 	model.ConnectStatus.SetText("Connection status: connected")
 	Header := http.Header{}
 	Header.Add("username", username)

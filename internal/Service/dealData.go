@@ -3,6 +3,7 @@ package Service
 import (
 	mes "day7/internal/message"
 	"fmt"
+	"strings"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/websocket"
@@ -52,4 +53,14 @@ func DownloadData(conn *websocket.Conn) (mes.Msg, error) {
 		fmt.Println(err1.Error())
 	}
 	return *msg, nil
+}
+
+func Check(s1, s2 string) bool {
+	strs := strings.Split(s1, "\n")
+	for i := 0; i < len(strs); i++ {
+		if s2 == strs[i] {
+			return false
+		}
+	}
+	return true
 }
