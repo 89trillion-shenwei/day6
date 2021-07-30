@@ -1,4 +1,4 @@
-package fyne
+package view
 
 import (
 	ctrl2 "day7/internal/ctrl"

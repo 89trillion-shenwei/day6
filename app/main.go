@@ -1,7 +1,7 @@
 package main
 
-import "day7/fyne"
+import "day7/view"
 
 func main() {
-	fyne.Init()
+	view.Init()
 }
