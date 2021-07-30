@@ -25,7 +25,7 @@ var client = &Client{
 }
 
 const (
-	writeWait      = 5 * time.Second
+	writeWait      = 10 * time.Second
 	pongWait       = 10 * time.Second
 	pingPeriod     = (pongWait * 9) / 10
 	maxMessageSize = 512
@@ -67,6 +67,9 @@ func (client *Client) ReceiveMsg() {
 			client.Send <- Service.Struct2proto(msg)
 			Left.SetText(str)
 		case "exit":
+			ConnectStatus.SetText("Connection status: disconnected")
+			Left.SetText("")
+			Right.SetText("")
 			break
 		}
 	}

@@ -12,6 +12,10 @@ import (
 
 // Connect 连接请求
 func Connect(username, url string) {
+	if model.UserEntry.Text == "" || model.ServerEntry.Text == "" {
+		println("有参数为空")
+		return
+	}
 	if !Service.Check(model.Left.Text, username) {
 		fmt.Println("重名")
 		return
@@ -48,7 +52,9 @@ func Connect(username, url string) {
 }
 
 func DisConnect() {
-	model.ConnectStatus.SetText("Connection status: disconnected")
+	if model.ConnectStatus.Text == "Connection status: disconnected" {
+		return
+	}
 	client := model.GetClient()
 	exitMsg1 := mes.Msg{
 		UserName: client.UserName,

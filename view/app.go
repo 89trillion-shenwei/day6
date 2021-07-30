@@ -32,10 +32,6 @@ func Init() {
 
 	//连接按钮
 	model.ConnectButton = widget.NewButton("connect", func() {
-		if model.UserEntry.Text == "" || model.ServerEntry.Text == "" {
-			println("有参数为空")
-			return
-		}
 		println(model.UserEntry.Text)
 		println(model.ServerEntry.Text)
 		ctrl2.Connect(model.UserEntry.Text, model.ServerEntry.Text)
