@@ -25,8 +25,8 @@ var client = &Client{
 }
 
 const (
-	writeWait      = 10 * time.Second
-	pongWait       = 10 * time.Second
+	writeWait      = 360 * time.Second
+	pongWait       = 360 * time.Second
 	pingPeriod     = (pongWait * 9) / 10
 	maxMessageSize = 512
 )
@@ -67,9 +67,10 @@ func (client *Client) ReceiveMsg() {
 			client.Send <- Service.Struct2proto(msg)
 			Left.SetText(str)
 		case "exit":
-			ConnectStatus.SetText("Connection status: disconnected")
-			Left.SetText("")
-			Right.SetText("")
+			if msg.UserName == client.UserName {
+				Left.SetText("")
+				Right.SetText("")
+			}
 			break
 		}
 	}
@@ -87,8 +88,8 @@ func (client *Client) SendMsg() {
 			client.Conn.WriteMessage(websocket.TextMessage, msg)
 			/*Msg:=Service.Proto2Struct(msg)
 			if Msg.MsgType=="exit"{
-				close(client.Send)
-				close(client.Receive)
+				//close(client.Send)
+				//close(client.Receive)
 				client.Conn.Close()
 				client.Conn=nil
 			}*/

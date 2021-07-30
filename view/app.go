@@ -44,7 +44,7 @@ func Init() {
 	model.SendButton = widget.NewButton("send", func() {
 		fmt.Println(model.UserEntry.Text + " send:" + model.MessageEntry.Text)
 		ctrl2.Send()
-		model.MessageEntry.SetText("") //输入框清空
+		ctrl2.ClearEntry()
 
 	})
 	model.SendButton.Resize(fyne.NewSize(100, 100))
